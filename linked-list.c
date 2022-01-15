@@ -41,7 +41,7 @@ void ll_clear(linked_list_t * ll, consume_func_t f)
 	}
 }
 
-uint64_t ll_len(linked_list_t * ll)
+uint64_t ll_len(const linked_list_t * ll)
 {
 	uint64_t l = 0;
 	ll_node_t * n;
@@ -116,5 +116,130 @@ bool ll_get_item(linked_list_t * ll, int32_t index, ll_value_t * res)
 	}
 
 	*res = n->value;
+	return true;
+}
+
+bool ll_set_item(linked_list_t * ll, int32_t index, ll_value_t val)
+{
+	if (ll == NULL)
+	{
+		errno = EINVAL;
+		return false;
+	}
+
+	int32_t i;
+	ll_node_t * n;
+	if (index < 0)
+	{
+		n = ll->tail;
+		if (n == NULL)
+		{
+			errno = ERANGE;
+			return false;
+		}
+
+		for (i = -1; i > index; --i)
+		{
+			if (n->prev == NULL)
+			{
+				errno = ERANGE;
+				return false;
+			}
+
+			n = n->prev;
+		}
+
+		n->value = val;
+		return true;
+	}
+
+	n = ll->head;
+	if (n == NULL)
+	{
+		errno = ERANGE;
+		return false;
+	}
+
+	for (i = 0; i < index; ++i)
+	{
+		if (n->next == NULL)
+		{
+			errno = ERANGE;
+			return false;
+		}
+
+		n = n->next;
+	}
+
+	n->value = val;
+	return true;
+}
+
+bool ll_remove_item(linked_list_t * ll, int32_t index, ll_value_t * res)
+{
+	if (ll == NULL)
+	{
+		errno = EINVAL;
+		return false;
+	}
+
+	int32_t i;
+	ll_node_t * n;
+	if (index < 0)
+	{
+		n = ll->tail;
+		if (n == NULL)
+		{
+			errno = ERANGE;
+			return false;
+		}
+
+		for (i = -1; i > index; --i)
+		{
+			if (n->prev == NULL)
+			{
+				errno = ERANGE;
+				return false;
+			}
+
+			n = n->prev;
+		}
+	}
+	else
+	{
+		n = ll->head;
+		if (n == NULL)
+		{
+			errno = ERANGE;
+			return false;
+		}
+
+		for (i = 0; i < index; ++i)
+		{
+			if (n->next == NULL)
+			{
+				errno = ERANGE;
+				return false;
+			}
+
+			n = n->next;
+		}
+	}
+
+	if (n->next != NULL)
+		n->next->prev = n->prev;
+	
+	if (n->prev != NULL)
+		n->prev->next = n->next;
+	
+	if (n == ll->head)
+		ll->head = n->next;
+	
+	if (n == ll->tail)
+		ll->tail = n->prev;
+	
+	if (res != NULL)
+		*res = n->value;
+
 	return true;
 }

@@ -49,7 +49,7 @@ void ll_clear(linked_list_t * ll, consume_func_t f);
 /*
  * returns the number of node in the linked list, if ll == NULL, 0 will be returned
  */
-uint64_t ll_len(linked_list_t * ll);
+uint64_t ll_len(const linked_list_t * ll);
 
 /*
  * returns true on sucess, false on failure
@@ -58,8 +58,35 @@ uint64_t ll_len(linked_list_t * ll);
  * 
  * if index >= 0 will start from head, if index < 0 will start from tail (like python list/tuple)
  * index = 0 -> returns head value | index = -1 -> returns tail value
+ * 
+ * the value pointed to by `ll_value_t * res` will be set to the value you're getting
  */
 bool ll_get_item(linked_list_t * ll, int32_t index, ll_value_t * res);
+
+/*
+ * returns true on sucess, false on failure
+ * (ll == NULL) -> errno = EINVAL | index is out of range -> errno = ERANGE
+ * (yes ERANGE isn't supposed to be used for that but, meh)
+ * 
+ * This replace an already existing value by another
+ */
+bool ll_set_item(linked_list_t * ll, int32_t index, ll_value_t val);
+
+/*
+ * returns true on sucess, false on failure
+ * (ll == NULL) -> errno = EINVAL | index is out of range -> errno = ERANGE
+ * (yes ERANGE isn't supposed to be used for that but, meh)
+ * 
+ * if index >= 0 will start from head, if index < 0 will start from tail (like python list/tuple)
+ * index = 0 -> remove head | index = -1 -> remove tail
+ * 
+ * if res != NULL, *res will be set to the value you're removing
+ */
+bool ll_remove_item(linked_list_t * ll, int32_t index, ll_value_t * res);
+
+#define ll_remove_head(ll, res) (ll_remove_item((ll), 0, (res)))
+#define ll_remove_tail(ll, res) (ll_remove_item((ll), -1, (res)))
+
 
 #ifdef __cplusplus
 }
