@@ -26,6 +26,7 @@ typedef struct linked_list_t
 	ll_node_t * tail;
 
 	cmp_func_t cmp;
+	uint64_t size;
 } linked_list_t;
 
 

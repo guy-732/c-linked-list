@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
@@ -39,10 +40,13 @@ void ll_clear(linked_list_t * ll, consume_func_t f)
 		n1 = n1->next;
 		_ll_free_node(n2);
 	}
+
+	ll->size = 0;
 }
 
 uint64_t ll_len(const linked_list_t * ll)
 {
+	#ifdef DEBUG
 	uint64_t l = 0;
 	ll_node_t * n;
 
@@ -60,7 +64,13 @@ uint64_t ll_len(const linked_list_t * ll)
 		n = n->next;
 	}
 
-	return l;
+	if (l != ll->size)
+		fprintf(stderr, "WARNING FILE %s LINE %d: counted %lu nodes in linked list @%p "
+				"while internal count is %ld (value changed to match)\n",
+				__FILE__, __LINE__, l, ll, ll->size);
+	#endif
+
+	return ll->size;
 }
 
 bool ll_get_item(linked_list_t * ll, int32_t index, ll_value_t * res)
@@ -238,6 +248,8 @@ bool ll_remove_item(linked_list_t * ll, int32_t index, ll_value_t * res)
 	if (n == ll->tail)
 		ll->tail = n->prev;
 	
+	ll->size--;
+
 	if (res != NULL)
 		*res = n->value;
 	
@@ -262,6 +274,7 @@ bool ll_insert_head(linked_list_t * ll, ll_value_t val)
 		n->next->prev = n;
 	
 	ll->head = n;
+	ll->size++;
 	return true;
 }
 
@@ -281,5 +294,6 @@ bool ll_insert_tail(linked_list_t * ll, ll_value_t val)
 		n->prev->next = n;
 	
 	ll->tail = n;
+	ll->size++;
 	return true;
 }
