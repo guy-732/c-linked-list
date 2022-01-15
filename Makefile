@@ -20,4 +20,8 @@ clean-objs:
 
 clean: clean-objs
 
-.PHONY: all all-objs clean-objs clean default
+debug: CPPFLAGS += -DDEBUG
+debug: CFLAGS += -g
+debug: all
+
+.PHONY: all all-objs clean-objs clean default debug
