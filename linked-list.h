@@ -12,13 +12,15 @@ typedef VALUE_TYPE ll_value_t;
 typedef int (*cmp_func_t)(ll_value_t, ll_value_t);
 typedef void (*consume_func_t)(ll_value_t);
 
-typedef struct ll_node_t
+typedef struct ll_node_t ll_node_t;
+
+struct ll_node_t
 {
 	ll_value_t value;
 
 	ll_node_t * prev;
 	ll_node_t * next;
-} ll_node_t;
+};
 
 typedef struct linked_list_t
 {
