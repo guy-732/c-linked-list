@@ -40,3 +40,81 @@ void ll_clear(linked_list_t * ll, consume_func_t f)
 		_ll_free_node(n2);
 	}
 }
+
+uint64_t ll_len(linked_list_t * ll)
+{
+	uint64_t l = 0;
+	ll_node_t * n;
+
+	if (ll == NULL)
+	{
+		errno = EINVAL;
+		return 0;
+	}
+
+	n = ll->head;
+
+	while (n != NULL)
+	{
+		++l;
+		n = n->next;
+	}
+
+	return l;
+}
+
+bool ll_get_item(linked_list_t * ll, int32_t index, ll_value_t * res)
+{
+	if (ll == NULL || res == NULL)
+	{
+		errno = EINVAL;
+		return false;
+	}
+
+	int32_t i;
+	ll_node_t * n;
+	if (index < 0)
+	{
+		n = ll->tail;
+		if (n == NULL)
+		{
+			errno = ERANGE;
+			return false;
+		}
+
+		for (i = -1; i > index; --i)
+		{
+			if (n->prev == NULL)
+			{
+				errno = ERANGE;
+				return false;
+			}
+
+			n = n->prev;
+		}
+
+		*res = n->value;
+		return true;
+	}
+
+	n = ll->head;
+	if (n == NULL)
+	{
+		errno = ERANGE;
+		return false;
+	}
+
+	for (i = 0; i < index; ++i)
+	{
+		if (n->next == NULL)
+		{
+			errno = ERANGE;
+			return false;
+		}
+
+		n = n->next;
+	}
+
+	*res = n->value;
+	return true;
+}
