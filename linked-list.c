@@ -81,49 +81,20 @@ bool ll_get_item(const linked_list_t * ll, int64_t index, ll_value_t * res)
 		return false;
 	}
 
-	int32_t i;
-	ll_node_t * n;
+	const ll_node_t * n;
 	if (index < 0)
 	{
-		n = ll->tail;
-		if (n == NULL)
-		{
-			errno = ERANGE;
-			return false;
-		}
-
-		for (i = -1; i > index; --i)
-		{
-			if (n->prev == NULL)
-			{
-				errno = ERANGE;
-				return false;
-			}
-
-			n = n->prev;
-		}
-
-		*res = n->value;
-		return true;
+		++index;
+		index *= -1;
+		n = _ll_get_node_n(ll->tail, index, false);
+	}
+	else
+	{
+		n = _ll_get_node_n(ll->head, index, true);
 	}
 
-	n = ll->head;
 	if (n == NULL)
-	{
-		errno = ERANGE;
 		return false;
-	}
-
-	for (i = 0; i < index; ++i)
-	{
-		if (n->next == NULL)
-		{
-			errno = ERANGE;
-			return false;
-		}
-
-		n = n->next;
-	}
 
 	*res = n->value;
 	return true;
@@ -137,49 +108,20 @@ bool ll_set_item(linked_list_t * ll, int64_t index, ll_value_t val)
 		return false;
 	}
 
-	int32_t i;
 	ll_node_t * n;
 	if (index < 0)
 	{
-		n = ll->tail;
-		if (n == NULL)
-		{
-			errno = ERANGE;
-			return false;
-		}
-
-		for (i = -1; i > index; --i)
-		{
-			if (n->prev == NULL)
-			{
-				errno = ERANGE;
-				return false;
-			}
-
-			n = n->prev;
-		}
-
-		n->value = val;
-		return true;
+		++index;
+		index *= -1;
+		n = _ll_get_node_n(ll->tail, index, false);
+	}
+	else
+	{
+		n = _ll_get_node_n(ll->head, index, true);
 	}
 
-	n = ll->head;
 	if (n == NULL)
-	{
-		errno = ERANGE;
 		return false;
-	}
-
-	for (i = 0; i < index; ++i)
-	{
-		if (n->next == NULL)
-		{
-			errno = ERANGE;
-			return false;
-		}
-
-		n = n->next;
-	}
 
 	n->value = val;
 	return true;
@@ -193,48 +135,20 @@ bool ll_remove_item(linked_list_t * ll, int64_t index, ll_value_t * res)
 		return false;
 	}
 
-	int32_t i;
 	ll_node_t * n;
 	if (index < 0)
 	{
-		n = ll->tail;
-		if (n == NULL)
-		{
-			errno = ERANGE;
-			return false;
-		}
-
-		for (i = -1; i > index; --i)
-		{
-			if (n->prev == NULL)
-			{
-				errno = ERANGE;
-				return false;
-			}
-
-			n = n->prev;
-		}
+		++index;
+		index *= -1;
+		n = _ll_get_node_n(ll->tail, index, false);
 	}
 	else
 	{
-		n = ll->head;
-		if (n == NULL)
-		{
-			errno = ERANGE;
-			return false;
-		}
-
-		for (i = 0; i < index; ++i)
-		{
-			if (n->next == NULL)
-			{
-				errno = ERANGE;
-				return false;
-			}
-
-			n = n->next;
-		}
+		n = _ll_get_node_n(ll->head, index, true);
 	}
+
+	if (n == NULL)
+		return false;
 
 	if (n->next != NULL)
 		n->next->prev = n->prev;

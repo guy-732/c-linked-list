@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <errno.h>
 #include <stdlib.h>
 
 #include "_internal.h"
@@ -29,4 +30,39 @@ void _ll_swap_nodes(ll_node_t * n1, ll_node_t * n2)
 	ll_value_t tmp = n1->value;
 	n1->value = n2->value;
 	n2->value = tmp;
+}
+
+ll_node_t * _ll_get_node_n(ll_node_t * node, int64_t n, bool forward)
+{
+	int64_t i;
+	if (node == NULL)
+	{
+		errno = ERANGE;
+		return NULL;
+	}
+
+	if (forward)
+		for (i = 0; i < n; ++i)
+		{
+			if (node->next == NULL)
+			{
+				errno = ERANGE;
+				return NULL;
+			}
+
+			node = node->next;
+		}
+	else
+		for (i = 0; i < n; ++i)
+		{
+			if (node->prev == NULL)
+			{
+				errno = ERANGE;
+				return NULL;
+			}
+
+			node = node->prev;
+		}
+
+	return node;
 }
