@@ -73,7 +73,7 @@ uint64_t ll_len(const linked_list_t * ll)
 	return ll->size;
 }
 
-bool ll_get_item(linked_list_t * ll, int64_t index, ll_value_t * res)
+bool ll_get_item(const linked_list_t * ll, int64_t index, ll_value_t * res)
 {
 	if (ll == NULL || res == NULL)
 	{
