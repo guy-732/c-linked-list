@@ -29,7 +29,18 @@ typedef struct linked_list_t
 extern "C"
 {
 #endif
+
+/*
+ * Initialize a linked list
+ * if cmp is NULL some functions will not be usable
+ */
 void ll_init(linked_list_t * ll, cmp_func_t cmp);
+
+/*
+ * Remove all elements of the linked list
+ * calling the `consume_func_t f` on each element before removing them if `f != NULL`
+ */
+void ll_clear(linked_list_t * ll, consume_func_t f);
 
 #ifdef __cplusplus
 }
