@@ -73,7 +73,7 @@ uint64_t ll_len(const linked_list_t * ll)
 	return ll->size;
 }
 
-bool ll_get_item(linked_list_t * ll, int32_t index, ll_value_t * res)
+bool ll_get_item(linked_list_t * ll, int64_t index, ll_value_t * res)
 {
 	if (ll == NULL || res == NULL)
 	{
@@ -129,7 +129,7 @@ bool ll_get_item(linked_list_t * ll, int32_t index, ll_value_t * res)
 	return true;
 }
 
-bool ll_set_item(linked_list_t * ll, int32_t index, ll_value_t val)
+bool ll_set_item(linked_list_t * ll, int64_t index, ll_value_t val)
 {
 	if (ll == NULL)
 	{
@@ -185,7 +185,7 @@ bool ll_set_item(linked_list_t * ll, int32_t index, ll_value_t val)
 	return true;
 }
 
-bool ll_remove_item(linked_list_t * ll, int32_t index, ll_value_t * res)
+bool ll_remove_item(linked_list_t * ll, int64_t index, ll_value_t * res)
 {
 	if (ll == NULL)
 	{

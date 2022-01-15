@@ -64,7 +64,7 @@ uint64_t ll_len(const linked_list_t * ll);
  * 
  * the value pointed to by `ll_value_t * res` will be set to the value you're getting
  */
-bool ll_get_item(linked_list_t * ll, int32_t index, ll_value_t * res);
+bool ll_get_item(linked_list_t * ll, int64_t index, ll_value_t * res);
 
 /*
  * returns true on sucess, false on failure
@@ -73,7 +73,7 @@ bool ll_get_item(linked_list_t * ll, int32_t index, ll_value_t * res);
  * 
  * This replace an already existing value by another
  */
-bool ll_set_item(linked_list_t * ll, int32_t index, ll_value_t val);
+bool ll_set_item(linked_list_t * ll, int64_t index, ll_value_t val);
 
 /*
  * returns true on sucess, false on failure
@@ -85,7 +85,7 @@ bool ll_set_item(linked_list_t * ll, int32_t index, ll_value_t val);
  * 
  * if res != NULL, *res will be set to the value you're removing
  */
-bool ll_remove_item(linked_list_t * ll, int32_t index, ll_value_t * res);
+bool ll_remove_item(linked_list_t * ll, int64_t index, ll_value_t * res);
 
 #define ll_remove_head(ll, res) (ll_remove_item((ll), 0, (res)))
 #define ll_remove_tail(ll, res) (ll_remove_item((ll), -1, (res)))
