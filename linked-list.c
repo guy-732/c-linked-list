@@ -240,6 +240,46 @@ bool ll_remove_item(linked_list_t * ll, int32_t index, ll_value_t * res)
 	
 	if (res != NULL)
 		*res = n->value;
+	
+	_ll_free_node(n);
 
+	return true;
+}
+
+bool ll_insert_head(linked_list_t * ll, ll_value_t val)
+{
+	if (ll == NULL)
+	{
+		errno = EINVAL;
+		return false;
+	}
+
+	ll_node_t * n = _ll_new_node(val, NULL, ll->head);
+	if (n == NULL)
+		return false;
+	
+	if (n->next != NULL)
+		n->next->prev = n;
+	
+	ll->head = n;
+	return true;
+}
+
+bool ll_insert_tail(linked_list_t * ll, ll_value_t val)
+{
+	if (ll == NULL)
+	{
+		errno = EINVAL;
+		return false;
+	}
+
+	ll_node_t * n = _ll_new_node(val, ll->tail, NULL);
+	if (n == NULL)
+		return false;
+	
+	if (n->prev != NULL)
+		n->prev->next = n;
+	
+	ll->tail = n;
 	return true;
 }

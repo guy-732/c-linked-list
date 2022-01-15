@@ -87,6 +87,15 @@ bool ll_remove_item(linked_list_t * ll, int32_t index, ll_value_t * res);
 #define ll_remove_head(ll, res) (ll_remove_item((ll), 0, (res)))
 #define ll_remove_tail(ll, res) (ll_remove_item((ll), -1, (res)))
 
+/*
+ * Insert a node at the beggining/end of the linked list,
+ * returns true on success, false on failure
+ * ll == NULL --> errno = EINVAL
+ * if allocation of a new node fails, false will be returned
+ */
+bool ll_insert_head(linked_list_t * ll, ll_value_t val);
+bool ll_insert_tail(linked_list_t * ll, ll_value_t val);
+
 
 #ifdef __cplusplus
 }
