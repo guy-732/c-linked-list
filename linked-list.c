@@ -188,6 +188,9 @@ bool ll_insert_head(linked_list_t * ll, ll_value_t val)
 		n->next->prev = n;
 	
 	ll->head = n;
+	if (ll->tail == NULL)
+		ll->tail = n;
+
 	ll->size++;
 	return true;
 }
@@ -208,6 +211,9 @@ bool ll_insert_tail(linked_list_t * ll, ll_value_t val)
 		n->prev->next = n;
 	
 	ll->tail = n;
+	if (ll->head == NULL)
+		ll->head = n;
+
 	ll->size++;
 	return true;
 }
