@@ -49,6 +49,7 @@ void ll_clear(linked_list_t * ll, consume_func_t f);
  * returns the number of node in the linked list, if ll == NULL, 0 will be returned
  */
 uint64_t ll_len(const linked_list_t * ll);
+#define ll_is_empty(ll) (ll_len((ll)) == 0)
 
 /*
  * returns true on sucess, false on failure
