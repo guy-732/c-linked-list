@@ -4,11 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#ifndef VALUE_TYPE
-#define VALUE_TYPE void *
-#endif
-
-typedef VALUE_TYPE ll_value_t;
+typedef void * ll_value_t;
 typedef int (*cmp_func_t)(ll_value_t, ll_value_t);
 typedef void (*consume_func_t)(ll_value_t);
 
