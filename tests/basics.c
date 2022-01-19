@@ -14,7 +14,7 @@ static int cmp_func(ll_value_t v1, ll_value_t v2)
 {
 	if (v1 < v2)
 		return -1;
-	
+
 	return ((v1 == v2) ? 0 : 1);
 }
 
