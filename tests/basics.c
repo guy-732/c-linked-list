@@ -7,7 +7,7 @@
 
 static void clear_func(ll_value_t val)
 {
-	printf("Value cleared: %zu\n", val);
+	printf("Value cleared: %ld\n", (uint64_t) val);
 }
 
 static int cmp_func(ll_value_t v1, ll_value_t v2)
@@ -27,7 +27,7 @@ int main()
 
 	for (i = 0; i < 5; ++i)
 	{
-		if (!ll_insert_head(&ll, (ll_value_t) i))
+		if (!ll_insert_tail(&ll, (ll_value_t) i))
 			fprintf(stderr, "Failed to add value %zu (%s)\n", i, strerror(errno));
 	}
 
@@ -35,7 +35,7 @@ int main()
 
 	for (i = 56; i > 52; --i)
 	{
-		if (!ll_insert_tail(&ll, (ll_value_t) i))
+		if (!ll_insert_head(&ll, (ll_value_t) i))
 			fprintf(stderr, "Failed to add value %zu (%s)\n", i, strerror(errno));
 	}
 
