@@ -19,7 +19,7 @@ bool ll_insert_sorted(linked_list_t * ll, ll_value_t val)
 	for (n = ll->head; n->next != NULL; n = n->next)
 	{
 		if (ll->cmp(n->value, n->next->value) < 0) /* value < next_value */
-			break;
+			return true;
 
 		_ll_swap_nodes(n, n->next);
 	}
