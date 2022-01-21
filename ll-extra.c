@@ -75,3 +75,25 @@ bool ll_min_max(linked_list_t * ll, int64_t * min_ptr, int64_t * max_ptr)
 
 	return true;
 }
+
+bool ll_is_sorted(linked_list_t * ll)
+{
+	ll_node_t * n;
+
+	if (ll == NULL || ll->cmp == NULL)
+	{
+		errno = EINVAL;
+		return false;
+	}
+
+	if ((n = ll->head) == NULL)
+		return true;
+
+	for (; n->next != NULL; n = n->next)
+	{
+		if (ll->cmp(n->value, n->next->value) > 0) /* val > next-val */
+			return false;
+	}
+
+	return true;
+}

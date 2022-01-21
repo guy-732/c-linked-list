@@ -27,6 +27,11 @@ bool ll_min_max(linked_list_t * ll, int64_t * min_ptr, int64_t * max_ptr);
 #define ll_min(ll, min_ptr) (ll_min_max((ll), (min_ptr), NULL))
 #define ll_max(ll, max_ptr) (ll_min_max((ll), NULL, (max_ptr)))
 
+/*
+ * (ll == NULL || ll->cmp == NULL) => false & errno = EINVAL
+ */
+bool ll_is_sorted(linked_list_t * ll);
+
 #ifdef __cplusplus
 }
 #endif
