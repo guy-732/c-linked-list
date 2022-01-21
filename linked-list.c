@@ -3,6 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
+#define LL_MINIMAL
 #include "linked-list.h"
 #include "_internal.h"
 

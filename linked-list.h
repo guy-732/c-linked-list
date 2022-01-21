@@ -55,10 +55,10 @@ uint64_t ll_len(const linked_list_t * ll);
  * returns true on sucess, false on failure
  * (ll == NULL || res == NULL) -> errno = EINVAL | index is out of range -> errno = ERANGE
  * (yes ERANGE isn't supposed to be used for that but, meh)
- * 
+ *
  * if index >= 0 will start from head, if index < 0 will start from tail (like python list/tuple)
  * index = 0 -> returns head value | index = -1 -> returns tail value
- * 
+ *
  * the value pointed to by `ll_value_t * res` will be set to the value you're getting
  */
 bool ll_get_item(const linked_list_t * ll, int64_t index, ll_value_t * res);
@@ -67,7 +67,7 @@ bool ll_get_item(const linked_list_t * ll, int64_t index, ll_value_t * res);
  * returns true on sucess, false on failure
  * (ll == NULL) -> errno = EINVAL | index is out of range -> errno = ERANGE
  * (yes ERANGE isn't supposed to be used for that but, meh)
- * 
+ *
  * This replace an already existing value by another
  */
 bool ll_set_item(linked_list_t * ll, int64_t index, ll_value_t val);
@@ -76,10 +76,10 @@ bool ll_set_item(linked_list_t * ll, int64_t index, ll_value_t val);
  * returns true on sucess, false on failure
  * (ll == NULL) -> errno = EINVAL | index is out of range -> errno = ERANGE
  * (yes ERANGE isn't supposed to be used for that but, meh)
- * 
+ *
  * if index >= 0 will start from head, if index < 0 will start from tail (like python list/tuple)
  * index = 0 -> remove head | index = -1 -> remove tail
- * 
+ *
  * if res != NULL, *res will be set to the value you're removing
  */
 bool ll_remove_item(linked_list_t * ll, int64_t index, ll_value_t * res);
@@ -106,6 +106,10 @@ bool ll_index_of(linked_list_t * ll, ll_value_t val, int64_t * index);
 
 #ifdef __cplusplus
 }
+#endif
+
+#ifndef LL_MINIMAL
+#include "ll-extra.h"
 #endif
 
 #endif
