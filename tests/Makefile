@@ -31,7 +31,6 @@ main-makefile:
 
 debug: CFLAGS += -g
 debug: CPPFLAGS += -DDEBUG
-debug: main-makefile
-	$(MAKE) CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" all
+debug: all
 
 .PHONY: all all-progs all-objs clean clean-objs clean-progs debug main-makefile
