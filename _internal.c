@@ -20,7 +20,7 @@ void _ll_swap_nodes(ll_node_t * n1, ll_node_t * n2)
 {
 	if (n1 == NULL || n2 == NULL)
 	{
-		#ifndef DEBUG
+		#ifdef DEBUG
 		fprintf(stderr, "WARNING FILE %s LINE %d: _ll_swap_nodes received NULL pointer\n",
 				__FILE__, __LINE__);
 		#endif
