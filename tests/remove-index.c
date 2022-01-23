@@ -39,7 +39,12 @@ int main()
 		printf("Removed value %lu from linked list\n", (uint64_t) v);
 	}
 
-	for (ui = 0; ui < LENGTH; ++ui)
+	if (!ll_remove_head(&ll, NULL) || !ll_remove_tail(&ll, NULL))
+	{
+		fprintf(stderr, "Failed to remove head and/or tail (errno: %s)\n", strerror(errno));
+	}
+
+	for (ui = 1; ui < LENGTH - 1; ++ui)
 	{
 		errno = 0;
 		if ((!ll_index_of(&ll, (ll_value_t) ui, &i)))
