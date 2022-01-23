@@ -19,6 +19,8 @@ $(COBJS): %.o: %.c
 basics: basics.o ../liblinked-list-min.a
 
 clean: clean-objs clean-progs
+	$(MAKE) -C ../ clean
+
 clean-objs:
 	$(RM) $(COBJS)
 
