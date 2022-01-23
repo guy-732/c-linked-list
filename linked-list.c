@@ -229,7 +229,7 @@ bool ll_index_of(linked_list_t * ll, ll_value_t val, int64_t * index)
 
 	int64_t i;
 	ll_node_t * n = ll->head;
-	for (i = 0; n != NULL; ++i)
+	for (i = 0; n != NULL; ++i, n = n->next)
 	{
 		if (ll->cmp(n->value, val) == 0)
 		{
