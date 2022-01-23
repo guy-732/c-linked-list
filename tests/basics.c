@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <string.h>
 
+#define LL_MINIMAL
 #include "../linked-list.h"
 #include "utility.h"
 

@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-COBJS = basics.o
-EXECS = basics
+EXECS = basics access
+COBJS = $(EXECS:=.o)
 
 ARCHIVES = ../liblinked-list-min.a ../liblinked-list.a
 
@@ -17,6 +17,7 @@ $(ARCHIVES) &: main-makefile
 $(COBJS): %.o: %.c
 
 basics: basics.o ../liblinked-list-min.a
+access: access.o ../liblinked-list-min.a
 
 clean: clean-objs clean-progs
 	$(MAKE) -C ../ clean
