@@ -27,7 +27,11 @@ bool ll_insert_sorted(linked_list_t * ll, ll_value_t val)
 	return true;
 }
 
-bool ll_min_max(linked_list_t * ll, int64_t * min_ptr, int64_t * max_ptr)
+bool ll_min_max(
+	linked_list_t * ll,
+	ll_value_t * min_ptr, int64_t * min_ind_ptr,
+	ll_value_t * max_ptr, int64_t * max_ind_ptr
+)
 {
 	int64_t i;
 	int64_t min_pos = 0, max_pos = 0;
@@ -43,7 +47,7 @@ bool ll_min_max(linked_list_t * ll, int64_t * min_ptr, int64_t * max_ptr)
 	if ((n = ll->head) == NULL)
 		return false;
 
-	if (min_ptr == NULL && max_ptr == NULL)
+	if (min_ptr == NULL && max_ptr == NULL && min_ind_ptr == NULL && max_ind_ptr == NULL)
 		return true;
 	/*
 	 * Not a failure, but we don't need to go through the linked list if nothing comes
@@ -67,11 +71,17 @@ bool ll_min_max(linked_list_t * ll, int64_t * min_ptr, int64_t * max_ptr)
 		}
 	}
 
+	if (min_ind_ptr != NULL)
+		*min_ind_ptr = min_pos;
+
 	if (min_ptr != NULL)
-		*min_ptr = min_pos;
+		*min_ptr = min;
+
+	if (max_ind_ptr != NULL)
+		*max_ind_ptr = max_pos;
 
 	if (max_ptr != NULL)
-		*max_ptr = max_pos;
+		*max_ptr = max;
 
 	return true;
 }

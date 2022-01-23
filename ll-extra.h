@@ -23,9 +23,13 @@ bool ll_insert_sorted(linked_list_t * ll, ll_value_t val);
  * returns `false` if the linked list is empty, if ll == NULL or ll->cmp == NULL,
  * errno will be set to EINVAL and `false` returned
  */
-bool ll_min_max(linked_list_t * ll, int64_t * min_ptr, int64_t * max_ptr);
-#define ll_min(ll, min_ptr) (ll_min_max((ll), (min_ptr), NULL))
-#define ll_max(ll, max_ptr) (ll_min_max((ll), NULL, (max_ptr)))
+bool ll_min_max(
+	linked_list_t * ll,
+	ll_value_t * min_ptr, int64_t * min_ind_ptr,
+	ll_value_t * max_ptr, int64_t * max_ind_ptr
+);
+#define ll_min(ll, min_ptr, min_ind_ptr) (ll_min_max((ll), (min_ptr), (min_ind_ptr), NULL, NULL))
+#define ll_max(ll, max_ptr, max_ind_ptr) (ll_min_max((ll), NULL, NULL, (max_ptr), (max_ind_ptr)))
 
 /*
  * (ll == NULL || ll->cmp == NULL) => false & errno = EINVAL
