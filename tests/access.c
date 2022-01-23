@@ -38,7 +38,7 @@ int main()
 			continue;
 		}
 
-		if (v1 != v2 || ((uint64_t) i) != v1)
+		if (v1 != v2 || ((ll_value_t) i) != v1)
 		{
 			fprintf(stderr,
 			"Values different from what was expected, got %lu & %lu, expected %ld\n",
@@ -46,10 +46,10 @@ int main()
 		}
 	}
 
-	for (i = 0; i < LENGTH; ++i)
+	for (i = 0; i < ((int64_t) LENGTH); ++i)
 	{
 		errno = 0;
-		if (!ll_set_item(&ll, i, i + 1))
+		if (!ll_set_item(&ll, i, (ll_value_t)(i + 1)))
 		{
 			fprintf(stderr, "Failed to set value at index %ld (errno: %s)\n", i, strerror(errno));
 		}
