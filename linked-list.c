@@ -219,7 +219,7 @@ bool ll_insert_tail(linked_list_t * ll, ll_value_t val)
 	return true;
 }
 
-bool ll_index_of(linked_list_t * ll, ll_value_t val, int64_t * index)
+bool ll_search(linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_t * value)
 {
 	if (ll == NULL || ll->cmp == NULL)
 	{
@@ -231,10 +231,13 @@ bool ll_index_of(linked_list_t * ll, ll_value_t val, int64_t * index)
 	ll_node_t * n = ll->head;
 	for (i = 0; n != NULL; ++i, n = n->next)
 	{
-		if (ll->cmp(n->value, val) == 0)
+		if (ll->cmp(n->value, target) == 0)
 		{
 			if (index != NULL)
 				*index = i;
+
+			if (value != NULL)
+				*value = n->value;
 			
 			return true;
 		}
