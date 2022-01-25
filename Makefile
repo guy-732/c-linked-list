@@ -26,7 +26,7 @@ liblinked-list.a: linked-list.o _internal.o ll-extra.o
 	$(AR) r $@ $^
 
 $(SHARED_OBJS): %.so: %.a
-	$(CC) -shared $(LDFLAGS) -o $@ $^
+	$(CC) -shared $(LDFLAGS) -o $@ -Wl,-whole-archive $^ -Wl,-no-whole-archive
 
 clean-objs:
 	$(RM) $(COBJS)
