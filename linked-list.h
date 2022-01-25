@@ -96,11 +96,14 @@ bool ll_remove_item(linked_list_t * ll, int64_t index, ll_value_t * res);
 bool ll_insert_head(linked_list_t * ll, ll_value_t val);
 bool ll_insert_tail(linked_list_t * ll, ll_value_t val);
 
+
+bool ll_search(linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_t * value);
+
 /*
  * returns true if value is found, false otherwise (or ll == NULL || ll->cmp == NULL)
  * if index != NULL, the first index of the number will be given to the pointed value
  */
-bool ll_index_of(linked_list_t * ll, ll_value_t val, int64_t * index);
+#define ll_index_of(ll, target, index) (ll_search((ll), (target), (index), NULL))
 #define ll_contains(ll, val) (ll_index_of((ll), (val), NULL))
 
 
