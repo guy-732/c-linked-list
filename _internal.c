@@ -66,3 +66,35 @@ ll_node_t * _ll_get_node_n(ll_node_t * node, int64_t n, bool forward)
 
 	return node;
 }
+
+bool _ll_shorter_index(uint64_t size, int64_t * index)
+{
+	int64_t s = (int64_t) size;
+	int64_t i = *index;
+	if (i < 0)
+	{
+		if (i < -s)
+		{
+			errno = ERANGE;
+			return false;
+		}
+
+		i += s;
+		if (i < (s >> 1))
+			*index = i;
+
+		return true;
+	}
+
+	if (i >= s)
+	{
+		errno = ERANGE;
+		return false;
+	}
+
+	if (i > (s >> 1))
+		*index = - s + i;
+
+
+	return true;
+}

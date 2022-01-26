@@ -54,6 +54,9 @@ bool ll_get_item(const linked_list_t * ll, int64_t index, ll_value_t * res)
 	}
 
 	const ll_node_t * n;
+	if (!_ll_shorter_index(ll_len(ll), &index))
+		return false;
+
 	if (index < 0)
 	{
 		++index;
@@ -81,6 +84,9 @@ bool ll_set_item(linked_list_t * ll, int64_t index, ll_value_t val)
 	}
 
 	ll_node_t * n;
+	if (!_ll_shorter_index(ll_len(ll), &index))
+		return false;
+
 	if (index < 0)
 	{
 		++index;
@@ -108,6 +114,9 @@ bool ll_remove_item(linked_list_t * ll, int64_t index, ll_value_t * res)
 	}
 
 	ll_node_t * n;
+	if (!_ll_shorter_index(ll_len(ll), &index))
+		return false;
+
 	if (index < 0)
 	{
 		++index;
@@ -190,7 +199,7 @@ bool ll_insert_tail(linked_list_t * ll, ll_value_t val)
 	return true;
 }
 
-bool ll_search(linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_t * value)
+bool ll_search(const linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_t * value)
 {
 	if (ll == NULL || ll->cmp == NULL)
 	{
