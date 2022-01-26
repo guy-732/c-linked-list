@@ -31,7 +31,7 @@ clean-progs:
 	$(RM) $(EXECS)
 
 main-makefile:
-	$(MAKE) -C ../ CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" all
+	$(MAKE) -C ../ CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" all-archives
 
 
 debug: CFLAGS += -g
