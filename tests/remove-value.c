@@ -23,12 +23,12 @@ int main()
 
 	for (ui = 0; ui < LENGTH; ++ui)
 	{
-		v = rand() % MAX_VAL;
+		v = (ll_value_t) (rand() % MAX_VAL);
 		if (!ll_insert_tail(&ll, v))
 			fprintf(stderr, "Failed to add value %lu (%s)\n", (uint64_t) v, strerror(errno));
 	}
 
-	v = rand() % MAX_VAL;
+	v = (ll_value_t) (rand() % MAX_VAL);
 	printf("Removing all %lu...\n", (uint64_t) v);
 
 	ret = ll_remove_values(&ll, v);
