@@ -88,6 +88,12 @@ bool ll_remove_item(linked_list_t * ll, int64_t index, ll_value_t * res);
 #define ll_remove_tail(ll, res) (ll_remove_item((ll), -1, (res)))
 
 /*
+ * remove all corresponding values and return the bumber of elements removed
+ * (-1 if ll == NULL || ll->cmp == NULL) 
+ */
+int64_t ll_remove_values(linked_list_t * ll, ll_value_t v);
+
+/*
  * Insert a node at the beggining/end of the linked list,
  * returns true on success, false on failure
  * ll == NULL --> errno = EINVAL
