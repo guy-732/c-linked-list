@@ -103,7 +103,7 @@ bool ll_insert_head(linked_list_t * ll, ll_value_t val);
 bool ll_insert_tail(linked_list_t * ll, ll_value_t val);
 
 
-bool ll_search(linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_t * value);
+bool ll_search(const linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_t * value);
 
 /*
  * returns true if value is found, false otherwise (or ll == NULL || ll->cmp == NULL)

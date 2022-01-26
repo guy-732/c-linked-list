@@ -190,7 +190,7 @@ bool ll_insert_tail(linked_list_t * ll, ll_value_t val)
 	return true;
 }
 
-bool ll_search(linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_t * value)
+bool ll_search(const linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_t * value)
 {
 	if (ll == NULL || ll->cmp == NULL)
 	{
