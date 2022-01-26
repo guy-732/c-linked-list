@@ -45,35 +45,6 @@ void ll_clear(linked_list_t * ll, consume_func_t f)
 	ll->size = 0;
 }
 
-uint64_t ll_len(const linked_list_t * ll)
-{
-	#ifdef DEBUG
-	uint64_t l = 0;
-	ll_node_t * n;
-
-	if (ll == NULL)
-	{
-		errno = EINVAL;
-		return 0;
-	}
-
-	n = ll->head;
-
-	while (n != NULL)
-	{
-		++l;
-		n = n->next;
-	}
-
-	if (l != ll->size)
-		fprintf(stderr, "WARNING FILE %s LINE %d: counted %lu nodes in linked list @%p "
-				"while internal count is %ld (value changed to match)\n",
-				__FILE__, __LINE__, l, ll, ll->size);
-	#endif
-
-	return ll->size;
-}
-
 bool ll_get_item(const linked_list_t * ll, int64_t index, ll_value_t * res)
 {
 	if (ll == NULL || res == NULL)
@@ -244,4 +215,42 @@ bool ll_search(linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_
 	}
 
 	return false;
+}
+
+int64_t ll_remove_values(linked_list_t * ll, ll_value_t v)
+{
+	int64_t count = 0;
+	ll_node_t * n, * tmp;
+
+	if (ll == NULL || ll->cmp == NULL)
+	{
+		errno = EINVAL;
+		return -1;
+	}
+
+	for (n = ll->head; n != NULL;)
+	{
+		if (ll->cmp(n->value, v) == 0) /* n->value == v */
+		{
+			if (n->next != NULL)
+				n->next->prev = n->prev;
+			else /* is tail */
+				ll->tail = n->prev;
+
+			if (n->prev != NULL)
+				n->prev->next = n->next;
+			else /* is head */
+				ll->head = n->next;
+
+			++count;
+			ll->size--;
+			tmp = n;
+			n = n->next;
+			_ll_free_node(tmp);
+		}
+		else
+			n = n->next;
+	}
+
+	return count;
 }

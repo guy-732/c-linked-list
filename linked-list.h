@@ -48,7 +48,7 @@ void ll_clear(linked_list_t * ll, consume_func_t f);
 /*
  * returns the number of node in the linked list, if ll == NULL, 0 will be returned
  */
-uint64_t ll_len(const linked_list_t * ll);
+#define ll_len(ll) ((ll)->size)
 #define ll_is_empty(ll) (ll_len((ll)) == 0)
 
 /*
@@ -86,6 +86,12 @@ bool ll_remove_item(linked_list_t * ll, int64_t index, ll_value_t * res);
 
 #define ll_remove_head(ll, res) (ll_remove_item((ll), 0, (res)))
 #define ll_remove_tail(ll, res) (ll_remove_item((ll), -1, (res)))
+
+/*
+ * remove all corresponding values and return the bumber of elements removed
+ * (-1 if ll == NULL || ll->cmp == NULL) 
+ */
+int64_t ll_remove_values(linked_list_t * ll, ll_value_t v);
 
 /*
  * Insert a node at the beggining/end of the linked list,
