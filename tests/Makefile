@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-EXECS = basics access remove-index
+EXECS = basics access remove-index remove-value
 COBJS = $(EXECS:=.o)
 
 ARCHIVES = ../liblinked-list-min.a ../liblinked-list.a
@@ -19,6 +19,7 @@ $(COBJS): %.o: %.c
 basics: basics.o ../liblinked-list-min.a
 access: access.o ../liblinked-list-min.a
 remove-index: remove-index.o ../liblinked-list-min.a
+remove-value: remove-value.o ../liblinked-list-min.a
 
 clean: clean-objs clean-progs
 	$(MAKE) -C ../ clean
