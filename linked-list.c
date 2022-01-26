@@ -245,3 +245,37 @@ bool ll_search(linked_list_t * ll, ll_value_t target, int64_t * index, ll_value_
 
 	return false;
 }
+
+int64_t ll_remove_values(linked_list_t * ll, ll_value_t v)
+{
+	int64_t count = 0;
+	ll_node_t * n;
+
+	if (ll == NULL || ll->cmp == NULL)
+	{
+		errno = EINVAL;
+		return -1;
+	}
+
+	for (n = ll->head; n != NULL; n = n->next)
+	{
+		if (ll->cmp(n->value, v) == 0) /* n->value == v */
+		{
+			if (n->next != NULL)
+				n->next->prev = n->prev;
+			else /* is tail */
+				ll->tail = n->prev;
+
+			if (n->prev != NULL)
+				n->prev->next = n->next;
+			else /* is head */
+				ll->head = n->next;
+
+			++count;
+			ll->size--;
+			_ll_free_node(n);
+		}
+	}
+
+	return count;
+}
