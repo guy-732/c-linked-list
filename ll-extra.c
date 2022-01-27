@@ -58,7 +58,7 @@ bool ll_min_max(
 	min = max = n->value;
 	n = n->next;
 
-	for (i = 0; n != NULL; n = n->next)
+	for (i = 1; n != NULL; ++i, n = n->next)
 	{
 		if (ll->cmp(min, n->value) > 0) /* min > value */
 		{
