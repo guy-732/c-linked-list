@@ -55,6 +55,6 @@ int main()
 		}
 	}
 
-	ll_clear(&ll, clear_func);
+	ll_clear(&ll, clear_func, NULL);
 	return 0;
 }

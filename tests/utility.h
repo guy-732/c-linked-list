@@ -5,7 +5,7 @@
 
 #include "../linked-list.h"
 
-static void clear_func(ll_value_t val)
+static void clear_func(ll_value_t val, void * ctx)
 {
 	printf("Value cleared: %ld\n", (uint64_t) val);
 }

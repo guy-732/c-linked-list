@@ -61,9 +61,9 @@ int main()
 
 
 	printf("\nClearing unsorted list...\n");
-	ll_clear(&ll1, clear_func);
+	ll_clear(&ll1, clear_func, NULL);
 	printf("\nClearing sorted list...\n");
-	ll_clear(&ll2, clear_func);
+	ll_clear(&ll2, clear_func, NULL);
 
 	return 0;
 }

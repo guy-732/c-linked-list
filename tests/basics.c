@@ -29,7 +29,7 @@ int main()
 
 	printf("Length: %zu\n", ll_len(&ll));
 
-	ll_clear(&ll, clear_func);
+	ll_clear(&ll, clear_func, NULL);
 
 	return 0;
 }

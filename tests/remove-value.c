@@ -35,7 +35,7 @@ int main()
 
 	printf("Removed %ld values\n", ret);
 
-	ll_clear(&ll, clear_func);
+	ll_clear(&ll, clear_func, NULL);
 
 	return 0;
 }
