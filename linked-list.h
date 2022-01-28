@@ -6,7 +6,7 @@
 
 typedef void * ll_value_t;
 typedef int (*cmp_func_t)(ll_value_t, ll_value_t);
-typedef void (*consume_func_t)(ll_value_t);
+typedef void (*consume_func_t)(ll_value_t, void * ctx);
 
 typedef struct ll_node_t ll_node_t;
 
@@ -43,7 +43,7 @@ void ll_init(linked_list_t * ll, cmp_func_t cmp);
  * Remove all elements of the linked list (from head to tail)
  * calling the `consume_func_t f` on each element before removing them if `f != NULL`
  */
-void ll_clear(linked_list_t * ll, consume_func_t f);
+void ll_clear(linked_list_t * ll, consume_func_t f, void * ctx);
 
 /*
  * returns the number of node in the linked list, if ll == NULL, 0 will be returned
