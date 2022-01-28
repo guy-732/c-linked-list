@@ -41,6 +41,6 @@ clean: clean-objs clean-archives clean-shared
 
 debug: CPPFLAGS += -DDEBUG
 debug: CFLAGS += -g
-debug: all
+debug: all-objs all-archives
 
 .PHONY: all all-objs all-archives all-shared clean-objs clean-archives clean-shared clean default debug

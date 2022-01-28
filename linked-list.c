@@ -20,7 +20,7 @@ void ll_init(linked_list_t * ll, cmp_func_t cmp)
 	ll->cmp = cmp;
 }
 
-void ll_clear(linked_list_t * ll, consume_func_t f)
+void ll_clear(linked_list_t * ll, consume_func_t f, void * ctx)
 {
 	if (ll == NULL)
 	{
@@ -35,7 +35,7 @@ void ll_clear(linked_list_t * ll, consume_func_t f)
 	while (n1 != NULL)
 	{
 		if (f != NULL)
-			f(n1->value);
+			f(n1->value, ctx);
 
 		n2 = n1;
 		n1 = n1->next;
