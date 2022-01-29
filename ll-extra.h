@@ -36,6 +36,12 @@ bool ll_min_max(
  */
 bool ll_is_sorted(const linked_list_t * ll);
 
+/*
+ * Execute function `f` with all values in `ll` in order (from first to last)
+ *
+ * `f` may break the iteration by calling longjmp (defined in <setjmp.h>)
+ * unlike with `ll_clear`, calling longjmp is safe
+ */
 void ll_foreach(const linked_list_t * ll, consume_func_t f, void * ctx);
 
 bool ll_add_all(linked_list_t * dest, const linked_list_t * src);

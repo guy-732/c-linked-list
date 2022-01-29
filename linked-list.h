@@ -42,6 +42,9 @@ void ll_init(linked_list_t * ll, cmp_func_t cmp);
 /*
  * Remove all elements of the linked list (from head to tail)
  * calling the `consume_func_t f` on each element before removing them if `f != NULL`
+ *
+ * function may NOT call longjmp (defined in <setjmp.h>), some blocks won't be freed
+ * and the linked list may have some contradicting values as a result
  */
 void ll_clear(linked_list_t * ll, consume_func_t f, void * ctx);
 
