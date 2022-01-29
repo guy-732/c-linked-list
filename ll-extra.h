@@ -24,7 +24,7 @@ bool ll_insert_sorted(linked_list_t * ll, ll_value_t val);
  * errno will be set to EINVAL and `false` returned
  */
 bool ll_min_max(
-	linked_list_t * ll,
+	const linked_list_t * ll,
 	ll_value_t * min_ptr, int64_t * min_ind_ptr,
 	ll_value_t * max_ptr, int64_t * max_ind_ptr
 );
@@ -34,7 +34,9 @@ bool ll_min_max(
 /*
  * (ll == NULL || ll->cmp == NULL) => false & errno = EINVAL
  */
-bool ll_is_sorted(linked_list_t * ll);
+bool ll_is_sorted(const linked_list_t * ll);
+
+void ll_foreach(const linked_list_t * ll, consume_func_t f, void * ctx);
 
 #ifdef __cplusplus
 }

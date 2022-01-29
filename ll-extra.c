@@ -29,7 +29,7 @@ bool ll_insert_sorted(linked_list_t * ll, ll_value_t val)
 }
 
 bool ll_min_max(
-	linked_list_t * ll,
+	const linked_list_t * ll,
 	ll_value_t * min_ptr, int64_t * min_ind_ptr,
 	ll_value_t * max_ptr, int64_t * max_ind_ptr
 )
@@ -87,7 +87,7 @@ bool ll_min_max(
 	return true;
 }
 
-bool ll_is_sorted(linked_list_t * ll)
+bool ll_is_sorted(const linked_list_t * ll)
 {
 	ll_node_t * n;
 
@@ -107,4 +107,17 @@ bool ll_is_sorted(linked_list_t * ll)
 	}
 
 	return true;
+}
+
+void ll_foreach(const linked_list_t * ll, consume_func_t f, void * ctx)
+{
+	ll_node_t * n;
+	if (ll == NULL || f == NULL)
+	{
+		errno = EINVAL;
+		return;
+	}
+
+	for (n = ll->head; n != NULL; n = n->next)
+		f(n->value, ctx);
 }
