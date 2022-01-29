@@ -38,6 +38,8 @@ bool ll_is_sorted(const linked_list_t * ll);
 
 void ll_foreach(const linked_list_t * ll, consume_func_t f, void * ctx);
 
+bool ll_add_all(linked_list_t * dest, const linked_list_t * src);
+
 #ifdef __cplusplus
 }
 #endif

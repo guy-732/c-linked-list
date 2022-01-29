@@ -1,4 +1,5 @@
 #include <errno.h>
+#include <setjmp.h>
 
 #include "ll-extra.h"
 #include "_internal.h"
@@ -120,4 +121,59 @@ void ll_foreach(const linked_list_t * ll, consume_func_t f, void * ctx)
 
 	for (n = ll->head; n != NULL; n = n->next)
 		f(n->value, ctx);
+}
+
+typedef struct ll_add_all_ctx_t
+{
+	linked_list_t * ll;
+	jmp_buf j;
+} ll_add_all_ctx_t;
+
+static void ll_add_all_consume_func(ll_value_t v, void * ctx);
+bool ll_add_all(linked_list_t * dest, const linked_list_t * src)
+{
+	linked_list_t tmp;
+	ll_add_all_ctx_t ctx = {.ll = &tmp};
+	ll_node_t * old_tail;
+
+	if (dest == NULL || src == NULL)
+	{
+		errno = EINVAL;
+		return false;
+	}
+
+	ll_init(&tmp, NULL);
+	if (setjmp(ctx.j) != 0)
+	{
+		ll_clear(&tmp, NULL, NULL);
+		return false;
+	}
+
+	ll_foreach(src, ll_add_all_consume_func, &ctx);
+	if (tmp.head != NULL)
+	{
+		old_tail = dest->tail;
+		if (old_tail == NULL)
+		{
+			dest->head = tmp.head;
+			dest->tail = tmp.tail;
+			dest->size = tmp.size;
+		}
+		else
+		{
+			dest->tail = tmp.tail;
+			old_tail->next = tmp.head;
+			tmp.head->prev = old_tail;
+			dest->size += tmp.size;
+		}
+	}
+
+	return true;
+}
+
+static void ll_add_all_consume_func(ll_value_t v, void * ctx)
+{
+	ll_add_all_ctx_t * c = (ll_add_all_ctx_t *) ctx;
+	if (!ll_insert_tail(c->ll, v))
+		longjmp(c->j, 1);
 }
