@@ -59,6 +59,10 @@ int main()
 	else
 		fprintf(stderr, "\tFailed to get min-max (%s)\n", strerror(errno));
 
+	/* Testing foreach & add_all */
+	if (!ll_add_all(&ll2, &ll1))
+		fprintf(stderr, "\nFailed to add all (%s)\n", strerror(errno));
+
 
 	printf("\nClearing unsorted list...\n");
 	ll_clear(&ll1, clear_func, NULL);
