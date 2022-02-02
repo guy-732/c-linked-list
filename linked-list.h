@@ -51,7 +51,7 @@ void ll_clear(linked_list_t * ll, consume_func_t f, void * ctx);
 /*
  * returns the number of node in the linked list, if ll == NULL, 0 will be returned
  */
-#define ll_len(ll) ((ll)->size)
+#define ll_len(ll) (((const linked_list_t *)(ll))->size)
 #define ll_is_empty(ll) (ll_len((ll)) == 0)
 
 /*
