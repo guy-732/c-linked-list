@@ -5,7 +5,7 @@
 
 #define LL_MINIMAL
 #include "linked-list.h"
-#include "_internal.h"
+#include "_ll-internal.h"
 
 
 void ll_init(linked_list_t * ll, cmp_func_t cmp)

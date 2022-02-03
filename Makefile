@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-COBJS = linked-list.o _internal.o ll-extra.o
+COBJS = linked-list.o _ll-internal.o ll-extra.o
 ARCHIVES = liblinked-list-min.a liblinked-list.a
 SHARED_OBJS = $(ARCHIVES:.a=.so)
 
@@ -9,9 +9,9 @@ default: all
 
 $(COBJS): %.o: %.c
 
-linked-list.o: linked-list.h _internal.h
-_internal.o: linked-list.h _internal.h
-ll-extra.o: ll-extra.h linked-list.h _internal.h
+linked-list.o: linked-list.h _ll-internal.h
+_internal.o: linked-list.h _ll-internal.h
+ll-extra.o: ll-extra.h linked-list.h _ll-internal.h
 
 
 all: all-objs all-archives all-shared
@@ -19,10 +19,10 @@ all-objs: $(COBJS)
 all-archives: $(ARCHIVES)
 all-shared: $(SHARED_OBJS)
 
-liblinked-list-min.a: linked-list.o _internal.o
+liblinked-list-min.a: linked-list.o _ll-internal.o
 	$(AR) r $@ $^
 
-liblinked-list.a: linked-list.o _internal.o ll-extra.o
+liblinked-list.a: linked-list.o _ll-internal.o ll-extra.o
 	$(AR) r $@ $^
 
 $(SHARED_OBJS): %.so: %.a

@@ -2,7 +2,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "_internal.h"
+#include "_ll-internal.h"
 
 ll_node_t * _ll_new_node(ll_value_t val, ll_node_t * prev, ll_node_t * next)
 {

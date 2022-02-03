@@ -2,7 +2,7 @@
 #include <setjmp.h>
 
 #include "ll-extra.h"
-#include "_internal.h"
+#include "_ll-internal.h"
 
 bool ll_insert_sorted(linked_list_t * ll, ll_value_t val)
 {
