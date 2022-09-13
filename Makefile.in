@@ -137,13 +137,13 @@ am__v_AR_1 =
 liblinked_list_minimal_a_AR = $(AR) $(ARFLAGS)
 liblinked_list_minimal_a_LIBADD =
 am_liblinked_list_minimal_a_OBJECTS = linked-list.$(OBJEXT) \
-	_ll_internal.$(OBJEXT)
+	_ll-internal.$(OBJEXT)
 liblinked_list_minimal_a_OBJECTS =  \
 	$(am_liblinked_list_minimal_a_OBJECTS)
 liblinked_list_a_AR = $(AR) $(ARFLAGS)
 liblinked_list_a_LIBADD =
 am_liblinked_list_a_OBJECTS = linked-list.$(OBJEXT) \
-	_ll_internal.$(OBJEXT) ll-extra.$(OBJEXT)
+	_ll-internal.$(OBJEXT) ll-extra.$(OBJEXT)
 liblinked_list_a_OBJECTS = $(am_liblinked_list_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -160,7 +160,7 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/_ll_internal.Po \
+am__depfiles_remade = ./$(DEPDIR)/_ll-internal.Po \
 	./$(DEPDIR)/linked-list.Po ./$(DEPDIR)/ll-extra.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
@@ -317,10 +317,10 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 lib_LIBRARIES = liblinked-list.a liblinked-list-minimal.a
-liblinked_list_minimal_a_SOURCES = linked-list.c _ll_internal.c
-liblinked_list_a_SOURCES = linked-list.c _ll_internal.c ll-extra.c
+liblinked_list_minimal_a_SOURCES = linked-list.c _ll-internal.c
+liblinked_list_a_SOURCES = linked-list.c _ll-internal.c ll-extra.c
 include_HEADERS = linked-list.h
-noinst_HEADERS = _ll_internal.h
+noinst_HEADERS = _ll-internal.h
 all: all-am
 
 .SUFFIXES:
@@ -406,7 +406,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_ll_internal.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_ll-internal.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/linked-list.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ll-extra.Po@am__quote@ # am--include-marker
 
@@ -719,7 +719,7 @@ clean-am: clean-generic clean-libLIBRARIES mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-		-rm -f ./$(DEPDIR)/_ll_internal.Po
+		-rm -f ./$(DEPDIR)/_ll-internal.Po
 	-rm -f ./$(DEPDIR)/linked-list.Po
 	-rm -f ./$(DEPDIR)/ll-extra.Po
 	-rm -f Makefile
@@ -769,7 +769,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-		-rm -f ./$(DEPDIR)/_ll_internal.Po
+		-rm -f ./$(DEPDIR)/_ll-internal.Po
 	-rm -f ./$(DEPDIR)/linked-list.Po
 	-rm -f ./$(DEPDIR)/ll-extra.Po
 	-rm -f Makefile
