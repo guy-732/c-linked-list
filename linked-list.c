@@ -4,7 +4,7 @@
 #include <errno.h>
 
 #define LL_MINIMAL
-#include "linked-list.h"
+#include <linked-list.h>
 #include "_ll-internal.h"
 
 

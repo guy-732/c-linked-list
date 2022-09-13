@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "linked-list.h"
+#include <linked-list.h>
 
 #ifdef __cplusplus
 extern "C"

@@ -92,7 +92,7 @@ bool ll_remove_item(linked_list_t * ll, int64_t index, ll_value_t * res);
 
 /*
  * remove all corresponding values and return the bumber of elements removed
- * (-1 if ll == NULL || ll->cmp == NULL) 
+ * (-1 if ll == NULL || ll->cmp == NULL)
  */
 int64_t ll_remove_values(linked_list_t * ll, ll_value_t v);
 
@@ -120,8 +120,56 @@ bool ll_search(const linked_list_t * ll, ll_value_t target, int64_t * index, ll_
 }
 #endif
 
+
 #ifndef LL_MINIMAL
-#include "ll-extra.h"
+
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
+/*
+ * Insert a value in sorted order
+ * (ll->cmp(val, previous_val) <= 0 && ll->cmp(val, next_val) >= 0)
+ *
+ * Assumes the linked list is already sorted
+ */
+bool ll_insert_sorted(linked_list_t * ll, ll_value_t val);
+
+/*
+ * find the minimum and maximum value in the linked list
+ * and assign the index to the pointer values (if not NULL)
+ *
+ * returns `false` if the linked list is empty, if ll == NULL or ll->cmp == NULL,
+ * errno will be set to EINVAL and `false` returned
+ */
+bool ll_min_max(
+	const linked_list_t * ll,
+	ll_value_t * min_ptr, int64_t * min_ind_ptr,
+	ll_value_t * max_ptr, int64_t * max_ind_ptr
+);
+#define ll_min(ll, min_ptr, min_ind_ptr) (ll_min_max((ll), (min_ptr), (min_ind_ptr), NULL, NULL))
+#define ll_max(ll, max_ptr, max_ind_ptr) (ll_min_max((ll), NULL, NULL, (max_ptr), (max_ind_ptr)))
+
+/*
+ * (ll == NULL || ll->cmp == NULL) => false & errno = EINVAL
+ */
+bool ll_is_sorted(const linked_list_t * ll);
+
+/*
+ * Execute function `f` with all values in `ll` in order (from first to last)
+ *
+ * `f` may break the iteration by calling longjmp (defined in <setjmp.h>)
+ * unlike with `ll_clear`, calling longjmp is safe
+ */
+void ll_foreach(const linked_list_t * ll, consume_func_t f, void * ctx);
+
+bool ll_add_all(linked_list_t * dest, const linked_list_t * src);
+
+#ifdef __cplusplus
+}
 #endif
+
+#endif // LL_MINIMAL
+
+#endif // __LINKED_LIST_H
