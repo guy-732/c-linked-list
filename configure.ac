@@ -5,9 +5,11 @@ AC_INIT([c-linked-list], [1.0])
 AC_CONFIG_SRCDIR([linked-list.c])
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_PROG_AR
 
 # Checks for programs.
 AC_PROG_CC
+AC_PROG_RANLIB
 
 # Checks for libraries.
 
