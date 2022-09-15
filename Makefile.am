@@ -1,8 +1,14 @@
-lib_LIBRARIES = liblinked-list.a liblinked-list-minimal.a
+PKG_VERS = 1:1:0
 
 
-liblinked_list_minimal_a_SOURCES = linked-list.c _ll-internal.c
-liblinked_list_a_SOURCES = linked-list.c _ll-internal.c ll-extra.c
+lib_LTLIBRARIES = liblinked-list.la liblinked-list-minimal.la
+
+
+liblinked_list_minimal_la_SOURCES = linked-list.c _ll-internal.c
+liblinked_list_la_SOURCES = linked-list.c _ll-internal.c ll-extra.c
+
+liblinked_list_minimal_la_LDFLAGS = -version-info $(PKG_VERS)
+liblinked_list_la_LDFLAGS = -version-info $(PKG_VERS)
 
 
 include_HEADERS = linked-list.h

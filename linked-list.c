@@ -7,6 +7,18 @@
 #include <linked-list.h>
 #include "_ll-internal.h"
 
+#include <config.h>
+
+const char * ll_get_version()
+{
+	return PACKAGE_VERSION;
+}
+
+const char * ll_get_pkg_name()
+{
+	return PACKAGE_NAME;
+}
+
 
 void ll_init(linked_list_t * ll, cmp_func_t cmp)
 {

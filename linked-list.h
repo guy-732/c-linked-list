@@ -33,6 +33,9 @@ extern "C"
 {
 #endif
 
+const char * ll_get_version();
+const char * ll_get_pkg_name();
+
 /*
  * Initialize a linked list
  * if cmp is NULL some functions will not be usable

@@ -4,6 +4,8 @@
 
 #include "_ll-internal.h"
 
+#include <config.h>
+
 ll_node_t * _ll_new_node(ll_value_t val, ll_node_t * prev, ll_node_t * next)
 {
 	ll_node_t * res = malloc(sizeof(ll_node_t));

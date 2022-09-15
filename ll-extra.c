@@ -4,6 +4,8 @@
 #include <linked-list.h>
 #include "_ll-internal.h"
 
+#include <config.h>
+
 bool ll_insert_sorted(linked_list_t * ll, ll_value_t val)
 {
 	ll_node_t * n;
